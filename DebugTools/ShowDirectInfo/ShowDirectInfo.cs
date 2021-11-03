@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace Gront
+namespace Omnilatent.Utils
 {
     public class ShowDirectInfo : MonoBehaviour
     {

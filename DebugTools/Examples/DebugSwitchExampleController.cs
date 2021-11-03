@@ -10,10 +10,20 @@ namespace Omnilatent.Utils.Example
     {
         public const string DEBUGSWITCHEXAMPLE_SCENE_NAME = "DebugSwitchExample";
 
+        private void Start()
+        {
+            ErrorLogger.Initialize();
+        }
+
         public void ToggleDebugMode()
         {
             DebugManager.ForceDebugMode = !DebugManager.ForceDebugMode;
             UnityEngine.SceneManagement.SceneManager.LoadScene(DEBUGSWITCHEXAMPLE_SCENE_NAME);
+        }
+
+        public void TestThrowException()
+        {
+            throw new System.Exception("Test");
         }
     }
 }
