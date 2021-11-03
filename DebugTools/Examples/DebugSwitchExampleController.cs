@@ -17,7 +17,8 @@ namespace Omnilatent.Utils.Example
 
         public void ToggleDebugMode()
         {
-            DebugManager.ForceDebugMode = !DebugManager.ForceDebugMode;
+            DebugManager.DebugModeActive = !DebugManager.DebugModeActive;
+            ToastMessage.ShowMessage($"DebugModeActive: {DebugManager.DebugModeActive}");
             UnityEngine.SceneManagement.SceneManager.LoadScene(DEBUGSWITCHEXAMPLE_SCENE_NAME);
         }
 

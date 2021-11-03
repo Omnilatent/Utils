@@ -12,8 +12,8 @@ namespace Omnilatent.Utils
         public static int currentSeed;
         public static bool showErrorMessageInRelease = false;
 
-        static bool forceDebugMode = false;
-        public static bool ForceDebugMode { get => forceDebugMode; set => forceDebugMode = value; }
+        static bool debugModeActive = false;
+        public static bool DebugModeActive { get => debugModeActive; set => debugModeActive = value; }
 
         public static DebugManager instance;
         private void Awake()
@@ -34,7 +34,7 @@ namespace Omnilatent.Utils
 #if DEBUG_MODE
             return true;
 #else 
-            if (Debug.isDebugBuild && forceDebugMode)
+            if (Debug.isDebugBuild && debugModeActive)
                 return true;
             return false;
 #endif

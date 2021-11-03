@@ -8,8 +8,7 @@ namespace Omnilatent.Utils
     {
         public enum Modes
         {
-            Unset = 0,
-            ShowOnlyInDebugMode = 1,
+            ShowOnlyInDebugMode = 0,
             ShowInDebugBuild = 2
         }
 
@@ -25,7 +24,6 @@ namespace Omnilatent.Utils
             bool canShow = true;
             switch (mode)
             {
-                case Modes.Unset:
                 case Modes.ShowOnlyInDebugMode:
                     canShow = DebugManager.IsDebugMode();
                     break;
