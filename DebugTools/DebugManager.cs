@@ -26,7 +26,7 @@ namespace Omnilatent.Utils
             {
                 instance = this;
             }
-            FunctionHelper.SetRootThenDontDestroy(this.gameObject);
+            CommonFunctions.SetRootThenDontDestroy(this.gameObject);
 
             /*if (!UnityEngine.Debug.isDebugBuild)
                 this.gameObject.SetActive(false);*/

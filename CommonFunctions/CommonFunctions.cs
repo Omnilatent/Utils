@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-//using DigitalRuby.Pooling;
 
 namespace Omnilatent.Utils
 {
-    public static partial class FunctionHelper
+    public static partial class CommonFunctions
     {
         #region CODE
-
         public static string HighlightText(string str, string color = "yellow")
         {
             return (str.Replace("[", string.Format("<color={0}>", color)).Replace("]", "</color>"));
@@ -30,14 +29,7 @@ namespace Omnilatent.Utils
         {
             return new Color(newCol.r, newCol.g, newCol.b, col.a);
         }
-
-        /// <summary>
-        /// Short for Localizes.GetString(str)
-        /// </summary>
-        /*public static string LC(this string str)
-        {
-            return Localizes.GetString(str);
-        }*/
+        #endregion
 
         #region Array
         public static T GetRandom<T>(this List<T> list)
@@ -106,6 +98,10 @@ namespace Omnilatent.Utils
             return list.GetIndexOrHighest(id - 1);
         }
 
+        /// <summary>
+        /// Shuffle List
+        /// </summary>
+        /// <param name="rnd">You can pass in a premade randomizer to make result predictable for debugging</param>
         public static void Shuffle<T>(this IList<T> list, System.Random rnd = null)
         {
             if (rnd == null)
@@ -119,6 +115,17 @@ namespace Omnilatent.Utils
             }
         }
 
+        /// <summary>
+        /// Shuffle Dictionary
+        /// </summary>
+        public static Dictionary<TKey, TValue> Shuffle<TKey, TValue>(
+           this Dictionary<TKey, TValue> source)
+        {
+            System.Random r = new System.Random();
+            return source.OrderBy(x => r.Next())
+               .ToDictionary(item => item.Key, item => item.Value);
+        }
+
         public static void Swap<T>(this IList<T> list, int i, int j)
         {
             var temp = list[i];
@@ -127,10 +134,7 @@ namespace Omnilatent.Utils
         }
         #endregion
 
-        #endregion
-
         #region GAME
-
         public static Vector3 SetX(this Vector3 vector, float x)
         {
             return new Vector3(x, vector.y);
@@ -161,7 +165,7 @@ namespace Omnilatent.Utils
         #endregion
 
         #region DEBUG
-        public static void DebugLog<T>(this List<T> list)
+        public static void LogElements<T>(this List<T> list)
         {
             Debug.Log("Begin List");
             foreach (var item in list)
