@@ -17,18 +17,24 @@ namespace Omnilatent.Utils
 
         void Awake()
         {
+            CheckCanShow();
+        }
+
+        public bool CheckCanShow()
+        {
+            bool canShow = true;
             switch (mode)
             {
                 case Modes.Unset:
                 case Modes.ShowOnlyInDebugMode:
-                    if (!DebugManager.IsDebugMode())
-                        gameObject.SetActive(false);
+                    canShow = DebugManager.IsDebugMode();
                     break;
                 case Modes.ShowInDebugBuild:
-                    if (!Debug.isDebugBuild)
-                        gameObject.SetActive(false);
+                    canShow = Debug.isDebugBuild;
                     break;
             }
+            gameObject.SetActive(canShow);
+            return canShow;
         }
     }
 }
