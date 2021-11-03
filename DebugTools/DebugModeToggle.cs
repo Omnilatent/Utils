@@ -15,7 +15,7 @@ namespace Omnilatent.Utils
 
         public void ToggleDebugMode()
         {
-            DebugManager.forceDebugMode = !DebugManager.forceDebugMode;
+            DebugManager.ForceDebugMode = !DebugManager.ForceDebugMode;
         }
     }
 }

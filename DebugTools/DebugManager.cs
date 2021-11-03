@@ -11,9 +11,9 @@ namespace Omnilatent.Utils
         public static string CurrentStageName;
         public static int currentSeed;
         public static bool showErrorMessageInRelease = false;
-        public const string testerCode = "hoppitest";
 
-        public static bool forceDebugMode = false;
+        static bool forceDebugMode = false;
+        public static bool ForceDebugMode { get => forceDebugMode; set => forceDebugMode = value; }
 
         public static DebugManager instance;
         private void Awake()
@@ -27,9 +27,6 @@ namespace Omnilatent.Utils
                 instance = this;
             }
             CommonFunctions.SetRootThenDontDestroy(this.gameObject);
-
-            /*if (!UnityEngine.Debug.isDebugBuild)
-                this.gameObject.SetActive(false);*/
         }
 
         public static bool IsDebugMode()
