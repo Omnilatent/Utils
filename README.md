@@ -17,3 +17,5 @@ Vietnamese:
 
 **ToastMessage**: 
 - ShowMessage(): Hiện một cái Toast lên, tự động biến mất sau 5 giây (có thể thay đổi bằng param).
+
+**CommonFunctions**: Tổng hợp nhiều hàm hữu ích thường dùng.
