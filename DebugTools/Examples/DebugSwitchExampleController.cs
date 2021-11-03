@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SS.View;
 using Omnilatent.Utils;
 
 namespace Omnilatent.Utils.Example

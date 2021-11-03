@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Omnilatent.Utils
 {
     public class ErrorDialog : MonoBehaviour
     {
-        [SerializeField] TMP_Text errorText;
+        [SerializeField] Text errorText;
 
         private void Start()
         {

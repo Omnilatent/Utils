@@ -1,0 +1,11 @@
+{
+    "name": "com.omnilatent.utils",
+    "displayName": "Omni Utilities",
+    "version": "0.1",
+    "unity": "2018.1",
+    "description": "Common utilities. \n\nTo find out more, click the \"View Documentation\" link.",
+    "keywords": ["utility"],
+    "category": "Utility",
+    "dependencies": {
+    }
+}

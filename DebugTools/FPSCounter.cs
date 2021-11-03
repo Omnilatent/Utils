@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 namespace Omnilatent.Utils
 {
     public class FPSCounter : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI fps;
+        [SerializeField] Text fps;
         int m_frameCounter = 0;
         float m_timeCounter = 0.0f;
         float m_lastFramerate = 0.0f;
