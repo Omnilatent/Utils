@@ -14,3 +14,6 @@ Vietnamese:
 - Gọi hàm ErrorLogger.Initialize() để kích hoạt chức năng tự động log lỗi.
 
 **FPSCounter**: Hiển thị FPS lên TextMeshProUGUI.
+
+**ToastMessage**: 
+- ShowMessage(): Hiện một cái Toast lên, tự động biến mất sau 5 giây (có thể thay đổi bằng param).
