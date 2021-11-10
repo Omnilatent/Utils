@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace Omnilatent.Utils
             bool canShow = true;
             switch (mode)
             {
+                default:
                 case Modes.ShowOnlyInDebugMode:
                     canShow = DebugManager.IsDebugMode();
                     break;
@@ -33,6 +35,14 @@ namespace Omnilatent.Utils
             }
             gameObject.SetActive(canShow);
             return canShow;
+        }
+
+        private void OnValidate()
+        {
+            if (!Enum.IsDefined(typeof(Modes), mode))
+            {
+                Debug.LogError($"Field [mode] of {gameObject.name} has invalid value [{mode}]");
+            }
         }
     }
 }
