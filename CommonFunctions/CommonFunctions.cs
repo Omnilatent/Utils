@@ -162,6 +162,12 @@ namespace Omnilatent.Utils
             float angle = Vector3.Angle(from, to);
             return (Vector3.Angle(right, to) > 90f) ? 360f - angle : angle;
         }
+
+        //from https://github.com/rocketgames/Extension-Methods-for-Unity
+        public static bool IsInLayerMask(this GameObject obj, LayerMask mask)
+        {
+            return ((mask.value & (1 << obj.layer)) > 0);
+        }
         #endregion
 
         #region DEBUG
