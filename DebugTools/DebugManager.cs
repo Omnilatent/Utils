@@ -13,7 +13,17 @@ namespace Omnilatent.Utils
         public static bool showErrorMessageInRelease = false;
 
         static bool debugModeActive = false;
-        public static bool DebugModeActive { get => debugModeActive; set => debugModeActive = value; }
+        public static bool DebugModeActive
+        {
+            get => debugModeActive; set
+            {
+                debugModeActive = value;
+                onDebugModeChange?.Invoke(debugModeActive);
+            }
+        }
+
+        public delegate void OnDebugModeChange(bool value);
+        public static OnDebugModeChange onDebugModeChange;
 
         public static DebugManager instance;
         private void Awake()
