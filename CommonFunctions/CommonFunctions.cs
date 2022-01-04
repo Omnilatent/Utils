@@ -137,7 +137,7 @@ namespace Omnilatent.Utils
         #region GAME
         public static Vector3 SetX(this Vector3 vector, float x)
         {
-            return new Vector3(x, vector.y);
+            return new Vector3(x, vector.y, vector.z);
         }
 
         public static Vector3 SetY(this Vector3 vector, float y)
