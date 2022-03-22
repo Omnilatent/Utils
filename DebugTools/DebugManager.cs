@@ -1,9 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Omnilatent.Utils
 {
+    [Flags]
+    public enum DebugModeFlag
+    {
+        NotSet = 0,
+        Release = 1,
+        DevBuild = 2,
+        DebugMode = 4,
+        DebugMode_DevBuild = DebugMode | DevBuild,
+    }
+
     public class DebugManager : MonoBehaviour
     {
         [SerializeField] ErrorDialog debugDialog;
@@ -39,6 +50,9 @@ namespace Omnilatent.Utils
             CommonFunctions.SetRootThenDontDestroy(this.gameObject);
         }
 
+        /// <summary>
+        /// Return true if it's development build & debug mode is on; or if it's release build and DEBUG_MODE scripting symbol is added.
+        /// </summary>
         public static bool IsDebugMode()
         {
 #if DEBUG_MODE
@@ -48,6 +62,34 @@ namespace Omnilatent.Utils
                 return true;
             return false;
 #endif
+        }
+
+        /// <summary>
+        /// Return true if the game's current setting satisfy the debug mode flag.
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public static bool CheckDebugFlag(DebugModeFlag flag)
+        {
+            bool result = false;
+            if (flag == DebugModeFlag.DebugMode_DevBuild)
+            {
+                if (Debug.isDebugBuild && debugModeActive)
+                    result = true;
+            }
+            else switch (flag)
+                {
+                    case DebugModeFlag.DebugMode:
+                        result = debugModeActive;
+                        break;
+                    case DebugModeFlag.Release:
+                        result = !Debug.isDebugBuild;
+                        break;
+                    case DebugModeFlag.DevBuild:
+                        result = Debug.isDebugBuild;
+                        break;
+                }
+            return result;
         }
 
         public static string LogCurrentGameDetail()
