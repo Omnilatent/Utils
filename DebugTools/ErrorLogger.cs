@@ -10,9 +10,24 @@ namespace Omnilatent.Utils
     {
         public class LogSetting
         {
-            public List<LogType> logTypesIncluded = null;
+            public List<LogType> logTypesIncluded;
             public DebugModeFlag logFlag = DebugModeFlag.Release;
             public DebugModeFlag showToastFlag = DebugModeFlag.DevBuild;
+
+            public LogSetting()
+            {
+                logTypesIncluded = new List<LogType>()
+                    {
+                        LogType.Error, LogType.Exception
+                    };
+            }
+
+            public LogSetting(List<LogType> logTypesIncluded, DebugModeFlag logFlag, DebugModeFlag showToastFlag)
+            {
+                this.logTypesIncluded = logTypesIncluded;
+                this.logFlag = logFlag;
+                this.showToastFlag = showToastFlag;
+            }
         }
 
         static LogSetting logSetting;
@@ -28,14 +43,6 @@ namespace Omnilatent.Utils
         {
             logSetting = p_LogSetting;
             if (logSetting == null) { logSetting = new LogSetting(); }
-
-            if (LogTypesIncluded == null)
-            {
-                ErrorLogger.LogTypesIncluded = new List<LogType>()
-                    {
-                        LogType.Error, LogType.Exception
-                    };
-            }
 
             if (DebugManager.CheckDebugFlag(logSetting.logFlag))
             {
