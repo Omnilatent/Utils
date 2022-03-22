@@ -57,17 +57,7 @@ namespace Omnilatent.Utils
 
         static void HandleLog(string logString, string stackTrace, LogType type)
         {
-            bool isValidLogType = false;
-            //Check if this message should be logged
-            for (int i = 0; i < LogTypesIncluded.Count; i++)
-            {
-                if (type == LogTypesIncluded[i])
-                {
-                    isValidLogType = true;
-                    break;
-                }
-            }
-            if (isValidLogType)
+            if (LogTypeIsIncluded(type))
             {
                 string msg = CombineLogString(logString, stackTrace, type);
                 LogToTextFile(msg);
@@ -87,12 +77,20 @@ namespace Omnilatent.Utils
 
         static void ShowToast(string logString, string stackTrace, LogType type)
         {
-            ToastMessage.ShowMessage(CombineLogString(logString, stackTrace, type));
+            if (LogTypeIsIncluded(type))
+            {
+                ToastMessage.ShowMessage($"{logString}");
+            }
         }
 
         static string CombineLogString(string logString, string stackTrace, LogType type)
         {
             return $"{DateTime.Now:u}: {logString}\nLog type: {type}.\nStack trace:\n{stackTrace}\n";
+        }
+
+        static bool LogTypeIsIncluded(LogType type)
+        {
+            return LogTypesIncluded.Contains(type);
         }
     }
 }
