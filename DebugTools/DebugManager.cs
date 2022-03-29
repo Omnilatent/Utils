@@ -77,18 +77,23 @@ namespace Omnilatent.Utils
                 if (Debug.isDebugBuild && debugModeActive)
                     result = true;
             }
-            else switch (flag)
+            else
+            {
+                if (flag.HasFlag(DebugModeFlag.Release))
                 {
-                    case DebugModeFlag.DebugMode:
-                        result = debugModeActive;
-                        break;
-                    case DebugModeFlag.Release:
-                        result = !Debug.isDebugBuild;
-                        break;
-                    case DebugModeFlag.DevBuild:
-                        result = Debug.isDebugBuild;
-                        break;
+                    result |= !Debug.isDebugBuild;
                 }
+
+                if (flag.HasFlag(DebugModeFlag.DevBuild))
+                {
+                    result |= Debug.isDebugBuild;
+                }
+
+                if (flag.HasFlag(DebugModeFlag.DebugMode))
+                {
+                    result |= debugModeActive;
+                }
+            }
             return result;
         }
 

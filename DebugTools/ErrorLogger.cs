@@ -11,7 +11,7 @@ namespace Omnilatent.Utils
         public class LogSetting
         {
             public List<LogType> logTypesIncluded;
-            public DebugModeFlag logFlag = DebugModeFlag.Release;
+            public DebugModeFlag logFlag = DebugModeFlag.Release | DebugModeFlag.DevBuild;
             public DebugModeFlag showToastFlag = DebugModeFlag.DevBuild;
 
             public LogSetting()
