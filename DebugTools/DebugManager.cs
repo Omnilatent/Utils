@@ -11,8 +11,9 @@ namespace Omnilatent.Utils
         NotSet = 0,
         Release = 1,
         DevBuild = 2,
-        DebugMode = 4,
-        DebugMode_DevBuild = DebugMode | DevBuild,
+        DebugMode = 4, //game is debug mode regardless of debug build or release build
+        DebugMode_DevBuild = DebugMode | DevBuild, //game is debug build AND debug mode is on
+        Always = DevBuild | Release
     }
 
     public class DebugManager : MonoBehaviour
