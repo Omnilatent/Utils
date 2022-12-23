@@ -15,7 +15,21 @@ namespace Omnilatent.Utils
 
         public Modes mode;
 
+        [Tooltip("If true, listen to debug mode change event to switch active.")]
+        [SerializeField] protected bool listenToDebugModeChange;
+
         void Awake()
+        {
+            if (listenToDebugModeChange) { DebugManager.onDebugModeChange += OnDebugModeChange; }
+            CheckCanShow();
+        }
+
+        private void OnDestroy()
+        {
+            if (listenToDebugModeChange) { DebugManager.onDebugModeChange -= OnDebugModeChange; }
+        }
+
+        private void OnDebugModeChange(bool value)
         {
             CheckCanShow();
         }
