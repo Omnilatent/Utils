@@ -53,6 +53,8 @@ namespace Omnilatent.Utils
             {
                 Application.logMessageReceived += ShowToast;
             }
+            
+            Application.quitting += OnApplicationQuitting;
         }
 
         static void HandleLog(string logString, string stackTrace, LogType type)
@@ -91,6 +93,13 @@ namespace Omnilatent.Utils
         static bool LogTypeIsIncluded(LogType type)
         {
             return LogTypesIncluded.Contains(type);
+        }
+
+        private static void OnApplicationQuitting()
+        {
+            Application.logMessageReceived -= HandleLog;
+            Application.logMessageReceived -= ShowToast;
+            Application.quitting -= OnApplicationQuitting;
         }
     }
 }
