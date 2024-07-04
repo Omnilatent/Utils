@@ -168,6 +168,21 @@ namespace Omnilatent.Utils
         {
             return ((mask.value & (1 << obj.layer)) > 0);
         }
+
+        public static int LayerMaskToLayer(LayerMask layerMask)
+        {
+            int layer = layerMask.value;
+            for (int i = 0; i < 32; i++)
+            {
+                if ((layer & (1 << i)) != 0)
+                {
+                    return i;
+                }
+            }
+
+            Debug.LogError("Invalid LayerMask.");
+            return 0;
+        }
         #endregion
 
         #region DEBUG
