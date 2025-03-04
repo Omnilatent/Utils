@@ -36,7 +36,7 @@ namespace Omnilatent.Utils
                     m_frameCounter = 0;
                     m_timeCounter = 0.0f;
                 }
-                fps.text = string.Format("FPS: {0}", m_lastFramerate);
+                fps.text = string.Format("FPS: {0:0.#}", m_lastFramerate);
             }
         }
     }
