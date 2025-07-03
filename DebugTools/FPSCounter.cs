@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,17 +8,27 @@ namespace Omnilatent.Utils
 {
     public class FPSCounter : MonoBehaviour
     {
-        [SerializeField] Text fps;
+        [SerializeField] TMP_Text fpsText;
         int m_frameCounter = 0;
         float m_timeCounter = 0.0f;
         float m_lastFramerate = 0.0f;
         public float m_refreshTime = 0.5f;
         [SerializeField] bool showFps = true;
+        [SerializeField] private string textFormat = "FPS: {0:F1}";
+        [SerializeField] bool _dontDestroyOnLoad;
+
+        private void Start()
+        {
+            if (_dontDestroyOnLoad)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+        }
 
         public void ToggleFPS(bool on)
         {
             showFps = on;
-            fps.text = string.Empty;
+            fpsText.text = string.Empty;
         }
 
         void Update()
@@ -36,7 +47,7 @@ namespace Omnilatent.Utils
                     m_frameCounter = 0;
                     m_timeCounter = 0.0f;
                 }
-                fps.text = string.Format("FPS: {0:0.#}", m_lastFramerate);
+                fpsText.text = string.Format(textFormat, m_lastFramerate);
             }
         }
     }
