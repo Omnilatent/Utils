@@ -15,12 +15,12 @@ namespace Omnilatent
         private const string MinVersionV5 = "5.0.0";
 
         [Test]
-        public void TargetSdkVersion_Is_35_Or_Higher()
+        public void TargetRequiredApiLevel()
         {
             #if UNITY_ANDROID
             int targetSdkVersion = (int)PlayerSettings.Android.targetSdkVersion;
             Assert.GreaterOrEqual(targetSdkVersion, MinTargetSdkVersion,
-                $"Target SDK Version must be {MinTargetSdkVersion} or higher. Current: {targetSdkVersion}");
+                $"Target API level/SDK Version must be {MinTargetSdkVersion} or higher. Current: {targetSdkVersion}");
             #else
         Assert.Ignore("Not an Android build target.");
             #endif
