@@ -19,3 +19,9 @@ Vietnamese:
 - ShowMessage(): Hiện một cái Toast lên, tự động biến mất sau 5 giây (có thể thay đổi bằng param).
 
 **CommonFunctions**: Tổng hợp nhiều hàm hữu ích thường dùng.
+
+## Tests
+
+Trong thư viện có sẵn một số cái test để kiểm tra dự án có cài những thư viện cần thiết chưa.
+
+Nếu package này được cài bằng Unity Package Manager, bạn cần bấm vào menu `Tools/Omnilatent/Enable Utility Tests` để Unity biết là package này có file Tests. 
