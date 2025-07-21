@@ -4,7 +4,6 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Omnilatent.Utils.EditorNS
 {
@@ -22,27 +21,36 @@ namespace Omnilatent.Utils.EditorNS
                 return;
             }
 
-            string json = File.ReadAllText(ManifestPath);
-            var manifest = JObject.Parse(json);
+            string content = File.ReadAllText(ManifestPath);
 
-            JArray testables = manifest["testables"] as JArray;
-            if (testables == null)
+            // Check if "testables" section exists
+            if (!content.Contains("\"testables\""))
             {
-                testables = new JArray();
-                manifest["testables"] = testables;
-            }
-
-            if (!testables.Contains(PackageName))
-            {
-                testables.Add(PackageName);
-                File.WriteAllText(ManifestPath, manifest.ToString());
-                Debug.Log($"Added '{PackageName}' to testables in manifest.json");
-                AssetDatabase.Refresh();
+                // Insert "testables": [] before the last closing brace
+                int insertIndex = content.LastIndexOf('}');
+                string toInsert = ",\n  \"testables\": [\n    \"" + PackageName + "\"\n  ]\n";
+                content = content.Insert(insertIndex, toInsert);
+                File.WriteAllText(ManifestPath, content);
+                Debug.Log($"Added testables section with '{PackageName}'");
             }
             else
             {
-                Debug.Log($"'{PackageName}' is already in testables");
+                // If section exists, check if package is already there
+                if (!content.Contains(PackageName))
+                {
+                    int arrayEnd = content.LastIndexOf(']');
+                    string toInsert = (content[arrayEnd - 1] == '[' ? "" : ",") + "\n    \"" + PackageName + "\"";
+                    content = content.Insert(arrayEnd, toInsert);
+                    File.WriteAllText(ManifestPath, content);
+                    Debug.Log($"Added '{PackageName}' to existing testables");
+                }
+                else
+                {
+                    Debug.Log($"'{PackageName}' already present in testables");
+                }
             }
+
+            AssetDatabase.Refresh();
         }
     }
 }
