@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Omnilatent.Firebase",
-        "Omnilatent.AppsFlyerUtils"
+        "Omnilatent.AppsFlyerUtils",
+        "Omnilatent.InAppPurchaseHelper"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

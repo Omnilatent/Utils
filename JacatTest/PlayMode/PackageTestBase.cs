@@ -14,7 +14,8 @@ namespace Omnilatent
     public abstract class PackageTestBase
     {
         protected abstract string PackageName { get; }
-        protected virtual string MainSceneName { get => "Main"; }
+        protected virtual string MainSceneName { get => GetFirstSceneInBuild(); }
+        public static string DefaultMainSceneName = "Main";
         protected abstract string DefineSymbol { get; }
         protected abstract string TargetClassFullName { get; }
 
@@ -139,6 +140,18 @@ namespace Omnilatent
         {
             var instance = GameObject.FindObjectOfType<T>();
             Assert.IsNotNull(instance, typeof(T).Name + " instance was not found in scene.");
+        }
+        
+        public virtual string GetFirstSceneInBuild()
+        {
+            #if UNITY_EDITOR
+            if (EditorBuildSettings.scenes.Length == 0)
+                return DefaultMainSceneName;
+
+            var firstScenePath = EditorBuildSettings.scenes[0].path;
+            return System.IO.Path.GetFileNameWithoutExtension(firstScenePath);
+            #endif
+            return DefaultMainSceneName;
         }
     }
 }
